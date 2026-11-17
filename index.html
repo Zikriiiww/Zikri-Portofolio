@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/c26cd2166c.js"></script>
+
+  <style>
+    .theme-icon {
+      display: none;
+    }
+    [data-bs-theme="dark"] .theme-icon-dark {
+      display: inline;
+    }
+    [data-bs-theme="light"] .theme-icon-light {
+      display: inline;
+    }
+
+    /* Theme toggle button styles */
+    #theme-toggle {
+      border: none;
+      background: transparent;
+      color: inherit;
+      padding: .25rem;
+      border-radius: .375rem;
+      transition: color .2s ease;
+    }
+
+    /* Dark mode styles */
+    [data-bs-theme="dark"] #theme-toggle {
+      color: #ffffff !important;
+    }
+    [data-bs-theme="dark"] #theme-toggle .theme-icon {
+      color: #ffffff !important;
+    }
+
+    /* Light mode styles */
+    [data-bs-theme="light"] #theme-toggle {
+      background-color: transparent !important;
+      color: #000000 !important;
+    }
+    [data-bs-theme="light"] #theme-toggle .theme-icon {
+      color: #000000 !important;
+    }
+
+    /* Ensure the toggle has no background in light mode (hover/focus/active too) */
+    [data-bs-theme="light"] #theme-toggle,
+    [data-bs-theme="light"] #theme-toggle:hover,
+    [data-bs-theme="light"] #theme-toggle:focus,
+    [data-bs-theme="light"] #theme-toggle:active {
+      background-color: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Light mode styles */
+    [data-bs-theme="light"] {
+      --bs-body-bg: #ffffff;
+      --bs-body-color: #000000;
+    }
+
+    [data-bs-theme="light"] .navbar {
+      background-color: #ffffff !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    [data-bs-theme="light"] .card {
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+    }
+
+    [data-bs-theme="light"] .nav-link {
+      color: #000000 !important;
+    }
+
+    [data-bs-theme="light"] .nav-link:hover {
+      background-color: #f8f9fa;
+      color: #000000 !important;
+    }
+
+    [data-bs-theme="light"] h1,
+    [data-bs-theme="light"] h2,
+    [data-bs-theme="light"] h3,
+    [data-bs-theme="light"] h4,
+    [data-bs-theme="light"] h5,
+    [data-bs-theme="light"] h6,
+    [data-bs-theme="light"] p,
+    [data-bs-theme="light"] li,
+    [data-bs-theme="light"] .navbar-brand,
+    [data-bs-theme="light"] strong,
+    [data-bs-theme="light"] small {
+      color: #000000;
+    }
+
+    [data-bs-theme="light"] .experience-item h5,
+    [data-bs-theme="light"] .text-primary,
+    [data-bs-theme="light"] .main h1 small {
+      color: #0d6efd !important;
+    }
+
+    [data-bs-theme="light"] .text-muted,
+    [data-bs-theme="light"] .main h6 {
+      color: #6c757d !important;
+    }
+
+    /* Dark mode styles */
+    [data-bs-theme="dark"] {
+      --bs-body-bg: #0a1929;
+      --bs-body-color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .navbar {
+      background-color: #000000 !important;
+      border-bottom: 1px solid #1e3a5f;
+    }
+
+    [data-bs-theme="dark"] .card {
+      background-color: #0a1929;
+      border: 1px solid #1e3a5f;
+    }
+
+    [data-bs-theme="dark"] .nav-link {
+      color: #ffffff !important;
+    }
+
+    [data-bs-theme="dark"] .nav-link:hover {
+      background-color: #132f4c;
+    }
+
+    [data-bs-theme="dark"] h1,
+    [data-bs-theme="dark"] h2,
+    [data-bs-theme="dark"] h3,
+    [data-bs-theme="dark"] h4,
+    [data-bs-theme="dark"] h5,
+    [data-bs-theme="dark"] h6,
+    [data-bs-theme="dark"] p,
+    [data-bs-theme="dark"] li,
+    [data-bs-theme="dark"] .navbar-brand {
+      color: #ffffff;
+    }
+
+    /* Light mode specific styles */
+    [data-bs-theme="light"] .card-body h4,
+    [data-bs-theme="light"] .card-body p {
+      color: #000000;
+    }
+
+    [data-bs-theme="light"] .text-muted {
+      color: #6c757d !important;
+    }
+
+    [data-bs-theme="light"] .card b {
+      color: #000000;
+    }
+
+    [data-bs-theme="light"] .btn-dark {
+      background-color: #000000;
+      border-color: #000000;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="light"] .btn-dark:hover {
+      background-color: #424649;
+      border-color: #373b3e;
+    }
+
+    [data-bs-theme="light"] .btn-outline-dark {
+      color: #212529;
+      border-color: #212529;
+    }
+
+    [data-bs-theme="light"] .btn-outline-dark:hover {
+      background-color: #212529;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="light"] .progress {
+      background-color: #e9ecef;
+    }
+
+    [data-bs-theme="light"] .progress-bar {
+      background-color: #0d6efd;
+    }
+
+    [data-bs-theme="light"] .circle {
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    [data-bs-theme="light"] .counter-section {
+      background-color: #212529;
+    }
+
+    [data-bs-theme="light"] .Services,
+    [data-bs-theme="light"] .portfolio,
+    [data-bs-theme="light"] .contact,
+    [data-bs-theme="light"] .about,
+    [data-bs-theme="light"] .main {
+      background-color: #ffffff;
+    }
+
+    /* Light mode: about section specifics */
+    [data-bs-theme="light"] .about {
+      background-color: #ffffff;
+      color: #000000;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    [data-bs-theme="light"] .about h2,
+    [data-bs-theme="light"] .about p,
+    [data-bs-theme="light"] .about label,
+    [data-bs-theme="light"] .about .tab-content {
+      color: #000000;
+    }
+
+    /* Ensure elements that use utility classes update in light mode */
+    [data-bs-theme="light"] .text-white {
+      color: #000000 !important;
+    }
+    [data-bs-theme="light"] .bg-dark {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    [data-bs-theme="light"] .bg-white {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    [data-bs-theme="light"] .form-control {
+      background-color: #ffffff;
+      color: #000000;
+      border-color: #ced4da;
+    }
+
+    [data-bs-theme="light"] .form-control::placeholder {
+      color: #6c757d;
+    }
+
+    /* Light mode: add border box around contact info column */
+    [data-bs-theme="light"] .contact .col-lg-4 {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(16,24,40,0.04);
+      padding: 2rem !important;
+    }
+
+    /* Dark mode specific styles */
+    [data-bs-theme="dark"] .text-muted {
+      color: #a0aec0 !important;
+    }
+
+    [data-bs-theme="dark"] .btn-dark {
+      background-color: #1e3a5f;
+      border-color: #2d4a6d;
+    }
+
+    [data-bs-theme="dark"] .btn-dark:hover {
+      background-color: #2d4a6d;
+      border-color: #3d5a7d;
+    }
+
+    [data-bs-theme="dark"] .btn-outline-dark {
+      color: #ffffff;
+      border-color: #1e3a5f;
+    }
+
+    [data-bs-theme="dark"] .btn-outline-dark:hover {
+      background-color: #1e3a5f;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .progress {
+      background-color: #132f4c;
+    }
+
+    [data-bs-theme="dark"] .progress-bar {
+      background-color: #2d4a6d;
+    }
+
+    [data-bs-theme="dark"] .circle {
+      background-color: #1e3a5f;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .counter-section {
+      background-color: #132f4c;
+    }
+
+    [data-bs-theme="dark"] .Services,
+    [data-bs-theme="dark"] .portfolio,
+    [data-bs-theme="dark"] .contact,
+    [data-bs-theme="dark"] .main {
+      background-color: #0a1929;
+    }
+
+    /* Home section specific styles */
+    .main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      margin-bottom: 1.5rem; /* small gap between Home and About */
+    }
+
+    /* Dark-mode only: horizontal side spacing for Home section */
+    [data-bs-theme="dark"] .main {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      [data-bs-theme="dark"] .main {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+
+    .main h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Theme-specific heading colors for Home */
+    [data-bs-theme="dark"] .main h1 {
+      color: #ffffff;
+    }
+    [data-bs-theme="light"] .main h1 {
+      color: #000000;
+    }
+
+    .main h1 small {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    [data-bs-theme="dark"] .main h1 small {
+      color: #66b3ff;
+    }
+    [data-bs-theme="light"] .main h1 small {
+      color: #0d6efd;
+    }
+
+    .main h6 {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    [data-bs-theme="dark"] .main h6 {
+      color: #a0aec0;
+    }
+    [data-bs-theme="light"] .main h6 {
+      color: #6c757d;
+    }
+
+    /* Custom Dark Mode Styles */
+    [data-bs-theme="dark"] {
+      --bs-body-bg: #000000;
+      --bs-body-color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .navbar {
+      background-color: #000000;
+      border-bottom: 1px solid #343a40;
+    }
+
+    [data-bs-theme="dark"] .card {
+      background-color: #0a1929;
+      border: 1px solid #343a40;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .bg-white {
+      background-color: #0a1929 !important;
+    }
+
+    [data-bs-theme="dark"] .bg-dark {
+      background-color: #000000 !important;
+    }
+
+    [data-bs-theme="dark"] .text-muted {
+      color: #e0e0e0 !important;
+    }
+
+    [data-bs-theme="dark"] .btn-light {
+      background-color: #0a1929;
+      border-color: #343a40;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .btn-light:hover {
+      background-color: #132f4c;
+      border-color: #495057;
+      color: #ffffff;
+    }
+
+    /* Additional text color adjustments for dark mode */
+    [data-bs-theme="dark"] h1,
+    [data-bs-theme="dark"] h2,
+    [data-bs-theme="dark"] h3,
+    [data-bs-theme="dark"] h4,
+    [data-bs-theme="dark"] h5,
+    [data-bs-theme="dark"] h6,
+    [data-bs-theme="dark"] p,
+    [data-bs-theme="dark"] .nav-link,
+    [data-bs-theme="dark"] .navbar-brand,
+    [data-bs-theme="dark"] li,
+    [data-bs-theme="dark"] small {
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .text-primary {
+      color: #66b3ff !important;
+    }
+
+    [data-bs-theme="dark"] strong {
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .card p {
+      color: #e0e0e0;
+    }
+
+    [data-bs-theme="dark"] .form-control {
+      background-color: #132f4c;
+      border-color: #343a40;
+      color: #e9ecef;
+    }
+
+    [data-bs-theme="dark"] .form-control::placeholder {
+      color: #6c757d;
+    }
+
+    [data-bs-theme="dark"] .progress {
+      background-color: #132f4c;
+    }
+
+    [data-bs-theme="dark"] .progress-bar {
+      background-color: #0d47a1;
+    }
+
+    [data-bs-theme="dark"] .circle {
+      background-color: #0d47a1;
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .nav-link {
+      color: #e9ecef;
+    }
+
+    [data-bs-theme="dark"] .nav-link:hover {
+      background-color: #132f4c;
+    }
+
+    /* Custom styling for sections in dark mode */
+    [data-bs-theme="dark"] .Services,
+    [data-bs-theme="dark"] .portfolio,
+    [data-bs-theme="dark"] .contact,
+    [data-bs-theme="dark"] .about {
+      background-color: #000000;
+    }
+
+    /* Dark mode: about section specifics */
+    [data-bs-theme="dark"] .about {
+      background-color: #0a1929;
+      color: #ffffff;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    [data-bs-theme="dark"] .about h2,
+    [data-bs-theme="dark"] .about p,
+    [data-bs-theme="dark"] .about label,
+    [data-bs-theme="dark"] .about .tab-content {
+      color: #ffffff;
+    }
+
+    [data-bs-theme="dark"] .counter-section {
+      background-color: #0a1929;
+      border: 1px solid #343a40;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="#">
+        <img src="Group.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-center me-2">
+        Zikri
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mx-auto">
+          <a class="nav-link px-lg-3 rounded" href="#Home">Home</a>
+          <a class="nav-link px-lg-3 rounded" href="#about">About</a>
+          <a class="nav-link px-lg-3 rounded" href="#service">Services</a>
+          <a class="nav-link px-lg-3 rounded" href="#portfolio">Portfolio</a>
+        </div>
+      </div>
+      <div class="contact ms-auto d-flex align-items-center ">
+        <button class="btn btn-link me-3" id="theme-toggle">
+          <i class="bi bi-moon-fill theme-icon theme-icon-dark"></i>
+          <i class="bi bi-sun-fill theme-icon theme-icon-light"></i>
+        </button>
+        <a class="btn btn-dark" href="#contact">Contact Me <i class="bi bi-telephone"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    // Dark mode toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      html.setAttribute('data-bs-theme', savedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-bs-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-bs-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+
+
+  <section id="Home" class="main py-5">
+    <div class="container py-5">
+      <div class="row py-5">
+        <div class="col-lg-6 py-5 mr-auto">
+          <h1><small>Hello I'am 👋🏻</small> <br>
+            Muh. Zikri K
+          </h1>
+          <h6> Robotic Enthusiast | Full-Stack Learner</h6>
+          <a href="#contact" class="btn btn-dark mt-4">Hire Me</a>
+          <a href="CV Muhammad Zikri Kurniawan.pdf" class="btn btn-outline-dark mt-4" download>
+            Download CV
+          </a>
+        </div>
+      </div>
+  </section>
+
+  <section id="about" class="about container">
+    <div class="row align-items">
+      <div class="col-lg-5">
+        <img src="main(1).jpeg" alt="Responsive image">
+      </div>
+
+      <div class="col-lg-7 tabs">
+        <input type="radio" name="tab" id="tab1" checked>
+        <label for="tab1">About Me</label>
+
+        <input type="radio" name="tab" id="tab2">
+        <label for="tab2">Skills</label>
+
+        <input type="radio" name="tab" id="tab3">
+        <label for="tab3">Experience</label>
+
+        
+       
+        <div class="content">
+          <div id="content1" class="tab-content">
+            <h2>My Story</h2>
+            <p>I’m <strong>Muhammad Zikri Kurniawan </strong> (19), a first-year student in the Bachelor of Informatics
+              Engineering Program,
+              Faculty of Engineering, Universitas Negeri Surabaya. I have a deep passion for technology and informatics,
+              especially in software development, network systems, and cybersecurity.
+
+             I have a strong passion for technology, especially in software development, network systems,
+            and cybersecurity. Alongside my interest in informatics, I am also deeply involved in 
+            aeromodelling—exploring aircraft design, flight mechanics, and innovative model engineering 
+            that integrates both creativity and technical precision. My enthusiasm drives me to keep learning, 
+            experimenting, and developing impactful solutions in every field I explore.</p>
+            <h2>Turning Ideas Into Innovative Aeromodelling Concepts</h2>
+            <p>I specialize in transforming creative ideas into innovative and functional aeromodelling concepts. 
+            By combining my technological skills with my passion for aeromodelling, I strive to create practical and enjoyable solutions, 
+            ensuring every project I work on delivers both high performance and exciting experiences.</p>
+          </div>
+
+          <div id="content2" class="tab-content">
+            <h2>My Skills</h2>
+            <ul>
+              <li>HTML | CSS | JavaScript</li>
+              <li>Bootstrap</li>
+              <li>Mission Planner | Canva</li>
+              <li>C++ | Python</li>
+            </ul>
+            <div class="row mt-4">
+              <div class="col-md-6 mb-4">
+                <div class="d-flex justify-content-between">
+                  <strong>HTML | CSS | JavaScript</strong>
+                  <p>70%</p>
+                </div>
+                <div class="progress" style="height: 6px;">
+                  <div class="progress-bar" style="--target-width: 80%;"></div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="d-flex justify-content-between">
+                  <strong>Bootstrap</strong>
+                  <p>75%</p>
+                </div>
+                <div class="progress" style="height: 6px;">
+                  <div class="progress-bar" style="--target-width: 85%;"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="d-flex justify-content-between">
+                  <strong> Mission Planner | Canva</strong>
+                  <p>80%</p>
+                </div>
+                <div class="progress" style="height: 6px;">
+                  <div class="progress-bar" style="--target-width: 99%;"></div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="d-flex justify-content-between">
+                  <strong>C++ | Python</strong>
+                  <p>75%</p>
+                </div>
+                <div class="progress" style="height: 6px;">
+                  <div class="progress-bar" style="--target-width: 75%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="content3" class="tab-content">
+            <h2 class="fw-bold mb-4">Experience</h2>
+
+            <div class="experience-list">
+              <div class="experience-item mb-4">
+                <h5 class="fw-bold">Web Developer Volunteer</h5>
+                <p class="text-primary mb-1">July 2025-August 2025
+                  <i class="bi bi-geo-alt-fill ms-1"></i>
+                  <span class="text-muted">Kupang, East Nusa Tenggara, Indonesia</span>
+                </p>
+                <p class="text-muted">contributing to meaningful digital experiences by 
+                  designing and developing clean, interactive, and accessible websites for community needs.</p>
+              </div>
+
+              <div class="experience-item mb-4">
+                <h5 class="fw-bold">Software of Racing Plane</h5>
+                <p class="text-primary mb-1">Feb 2025-Now
+                  <i class="bi bi-geo-alt-fill ms-1"></i>
+                  <span class="text-muted">Surabaya, East Java Indonesia</span>
+                </p>
+                <p class="text-muted">operate and monitor an aircraft robot autonomously..</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="Services">
+    <div class="container">
+      <h1 class="text-center pb-5">Services <br> <small>This is My Expertise, The Services I'll Provide My
+          Clients</small></h1>
+      <div class="row pb-3">
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-desktop"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Web Design</h4>
+              <p>I approach each project individually and always focus on the result.</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-code"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Web Development</h4>
+              <p>Good design adds value faster than it adds cost.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-mobile-alt"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Responsive Design</h4>
+              <p>Create designs that look great and work seamlessly on all devices.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-plane"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Aeromodelling Enthusiast</h4>
+              <p>Create the program for autonomous robot's plane.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-video"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Video Editing</h4>
+              <p>Stream, document, and edit moments beautifully.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-3">
+          <div class="card text-center py-3">
+            <div class="card-body">
+              <div class="circle text-center mx-auto mb-3">
+                <span><i class="fas fa-robot"></i></span>
+              </div>
+              <h4 class="font-weight-bold">Robotics Development</h4>
+              <p>Develop and program robots for automation and innovative solutions.</p>
+            </div>
+          </div>
+        </div>
+  </section>
+
+
+  <section id="portfolio" class="portfolio">
+    <div class="container text-center py-5">
+      <h1 class="text-center pb-5">Portfolio <br> <small>A showcase of my best projects and creative works in tech and
+          design.</small></h1>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <img src="Menang (1).jpeg" class="img-fluid portfolio-img" alt="Portfolio 1">
+        </div>
+        <div class="col-lg-4 mb-4">
+          <img src="Menang (2).jpeg" class="img-fluid portfolio-img" alt="Portfolio 2">
+        </div>
+        <div class="col-lg-4 mb-4">
+          <img src="Menang (3).jpeg" class="img-fluid portfolio-img" alt="Portfolio 3">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="row py-5">
+        <div class="row g-0 shadow-lg overflow-hidden rounded-3">
+          <div class="col-lg-8 bg-white p-5">
+            <h2 class="fw-bold mb-4">Send a Message</h2>
+            <form>
+              <h1>Name</h1>
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Your First Name & Last Name">
+              </div>
+              <h1>Email</h1>
+              <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Your Email">
+              </div>
+              <h1>Message</h1>
+              <div class="mb-3">
+                <textarea class="form-control" rows="5" placeholder="How can we help?"></textarea>
+              </div>
+              <button type="submit" class="btn btn-dark">submit</button>
+            </form>
+
+          </div>
+          <div class="col-lg-4 bg-dark text-white p-5">
+            <h4 class="mb-4 fw-bold">Contact Info</h4>
+            <p class="mb-2"><i class="bi bi-telephone-fill me-2"></i> +62 (821) 23456789</p>
+            <p class="mb-4"><i class="bi bi-envelope-fill me-2"></i>24051204066@gmail.com</p>
+            <div class="d-flex gap-3 fs-4">
+              <a href="#" class="text-secondary"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-secondary"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="text-secondary"><i class="bi bi-youtube"></i></a>
+              <a href="#" class="text-secondary"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+<script>
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => { 
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / 100;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 20);
+      } else { 
+        counter.innerText = target.toLocaleString();
+      }
+    };
+    updateCount();
+  });
+</script>
+
+</html>
